@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#Author - njoroge morris
+# Author - njoroge morris
 
 def magic_calculation(a, b, c):
     """match the bytecode provided."""

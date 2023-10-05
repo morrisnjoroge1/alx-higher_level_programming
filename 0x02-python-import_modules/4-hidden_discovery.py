@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#Author - morris njoroge
 
 if __name__ == "__main__":
     """Print all names defined by hidden_4 module."""

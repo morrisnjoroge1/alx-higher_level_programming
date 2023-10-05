@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#Author - morris njoroge
 
 if __name__ == "__main__":
     """Print the number of and list of arguments."""

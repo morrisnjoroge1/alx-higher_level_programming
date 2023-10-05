@@ -1,5 +1,5 @@
 #!/usr/bin/python3
- #Author morris njoroge
+#Author - morris njoroge
 
 if __name__ == "__main__":
     """Print the addition of all arguments."""

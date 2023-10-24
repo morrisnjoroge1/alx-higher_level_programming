@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-'''
-Empyt class that defines square.
-'''
+"""
+empty class that defines a square
+"""
 
 
-class square:
+class Square:
+    """Represent a square."""
     pass

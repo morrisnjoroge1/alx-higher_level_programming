@@ -5,6 +5,7 @@ Defines a locked class
 
 """
 
+
 class LockedClass:
     """
     prevents the user from dynamically creating new instance attributes,

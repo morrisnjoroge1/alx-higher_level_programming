@@ -4,6 +4,8 @@
 Defines a matrix division function.
 
 """
+
+
 def matrix_divided(matrix, div):
     """ A function that divides the integer/float numbers of a matrix
 
@@ -23,7 +25,6 @@ def matrix_divided(matrix, div):
         ZeroDivisionError: If div is zero
     Return:
          A new matrix representing the result of the division.
-
 
     """
 

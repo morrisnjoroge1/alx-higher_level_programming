@@ -6,21 +6,21 @@ class Student that defines a student.
 """
 
 
-class Student
-""" reps student"""
+class Student:
+    """represents students"""
 
-def __init__(self, first_name, last_name, age):
-    """ initialize student.
+    def __init__(self, first_name, last_name, age):
+        """initialize new student.
 
-    Args:
-         first_name (str): The first name of the student.
-         last_name (str): The last name of the student.
-          age (int): The age of the student.
-    """
+        Args:
+            first_name (str): The first name of the student.
+            last_name (str): The last name of the student.
+            age (int): The age of the student.
+        """
 
-    self.first_name = first_name
-    self.last_name = last_name
-    self.age = age
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
     def to_json(self):
         """Get a dictionary representation of the Student."""

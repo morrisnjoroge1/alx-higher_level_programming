@@ -84,5 +84,39 @@ class Base:
         return json.loads(json_str)
 
     
-    `
+    @classmethod
+    def create(cls **attribute)
+        """Create an instance of the class with attributes from a dictionary.
+            
+        Args:
+            **attributes (dict): Key/value pairs of attributes for initialization.
+        """
 
+        if not dictionary or dictionary == {}:
+            return None
+
+        if artributes:
+            if cls.__name__ == "Rectangle":
+                new_instance = cls(1, 1)
+            else:
+                new_instance = cls(1)
+            new_instance.update(**attributes)
+            return new_instance
+
+     @classmethod
+     def load_from_file(cls):
+         """Load a list of instances from a file containing JSON strings.
+         Reads from `<cls.__name__>.json`.
+
+         Returns:
+            If the file doesn't exist or there's an issue - an empty list.
+            Otherwise - a list of instantiated instances.
+        """
+
+        filename = str(cls.__name__) + ".json"
+        try:
+            with open(filename, "r") as jsonfile:
+                list_dicts = Base.from_json_string(jsonfile.read())
+                return [cls.create(**d) for d in list_dicts]
+            except FileNotFoundError:
+                return []

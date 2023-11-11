@@ -49,3 +49,40 @@ class Base:
         if not list_dictionaries:
             return "[]"
         return json.dumps(list_of_dicts)
+
+
+    @classmethod
+    def save_to_file(cls,list_of_objects):
+        """Saves the JSON serialization of a list of objects to a file.
+
+        Args:
+            lists_obj(list) - list pof inherited Base inheritance
+        """
+
+       filename = cls.__name__ + ".json"
+
+       with open(filename, "w") as jsonfile:
+           if not list_objs:
+               jsonfile.write("[]")
+            else:
+                list_dicts = [o.to_dictionary() for o in list_objs]
+                jsonfile.write(Base.to_json_string(list_dicts))
+
+
+    @staticmethod
+    def from_json_string(json_str):
+        """Deserialize a JSON string.
+
+        Args:
+            json_str (str): A JSON string representing a list of dictionaries.
+        Returns:
+            If json_str is None or empty - an empty list.
+            Otherwise - the Python list represented by json_str.
+        """
+        if not json_str or json_str == "[]":
+            return []
+        return json.loads(json_str)
+
+    
+    `
+

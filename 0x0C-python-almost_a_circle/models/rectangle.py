@@ -56,7 +56,7 @@ class Rectangle(Base):
 
     @property
     def x(self):
-        """Retrieve x"""
+        """getter for x"""
         return self.__x
 
     @x.setter
@@ -70,7 +70,7 @@ class Rectangle(Base):
 
     @property
     def y(self):
-        """Retrieve y"""
+        """getter for  y"""
         return self.__y
 
     @y.setter
@@ -81,3 +81,27 @@ class Rectangle(Base):
         if value < 0:
             raise ValueError("y must be >= 0")
         self.__y = value
+
+
+    def area(self):
+        """returns the area value of the Rectangle instance."""
+        return self.__width * self.__height
+
+    def display(self):
+        """prints in stdout the Rectangle instance with the character #"""
+
+        for i in range(self.__y):
+            print()
+
+        for i in range(self.__height):
+            for n in range(self.__width + self.__x):
+                if n < self.__x:
+                    print(" ", end="")
+                    continue
+                print("#", end="")
+            print()
+    def __str__(self):
+        """Return the string representation of the Rectangle instance."""
+
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, 
+                self.__x, self.__y, self.__width, self.__height)

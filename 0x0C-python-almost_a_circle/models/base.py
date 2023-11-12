@@ -85,7 +85,7 @@ class Base:
 
     
     @classmethod
-    def create(cls **attribute)
+    def create(cls **dictionary)
         """Create an instance of the class with attributes from a dictionary.
             
         Args:
@@ -95,12 +95,12 @@ class Base:
         if not dictionary or dictionary == {}:
             return None
 
-        if artributes:
+        if dictionary:
             if cls.__name__ == "Rectangle":
                 new_instance = cls(1, 1)
             else:
                 new_instance = cls(1)
-            new_instance.update(**attributes)
+            new_instance.update(**dictionary)
             return new_instance
 
      @classmethod
@@ -144,4 +144,73 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
+        """Return a list of classes instantiated from a CSV file.
 
+        Reads from `cls.__name__`.csv`.
+
+        Returns:
+            If the file does not exist - an empty list
+            Otherwise - a list of instantiated classes.
+        """
+
+        filename = cls.__name__ + ".csv"
+        try:
+            with open(filename, "r", newline="")as csvfile:
+                if cls.__name__ == "Rectangle":
+                    #depends on classname,deff fieleldnames
+                    #for reading data from csv file
+                   fieldnames = ["id", "width", "height", "x", "y"]
+               else:
+                   fieldnames = ["id", "size", "x", "y"]
+                
+                #read data fromcsv file
+                list = csv.DictReader(file, fieldnames=fieldnames)
+
+                #convert read dict into list dict
+                list = [dict({k, int(v)} for k, v in d.items())
+                        for d in list]
+                return [cls.create(**d) for d in list]
+            except FileNotFoundError:
+                return []
+
+        @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Draw Rectangles and Squares using the turtle module.
+
+        Args:
+            list_rectangles (list): A list of Rectangle objects to draw.
+            list_squares (list): A list of Square objects to draw.
+        """
+        t = turtle.Turtle()
+        t.screen.bgcolor("#b7312c")
+        t.pensize(2)
+        t.shape("turtle")
+        t.speed(0)
+
+        t.color("#ffffff")
+        #draw rectangle
+        for rect in list_rectangles:
+            t.showturtle()
+            t.penup()
+            t.goto(rect.x, rect.y)
+            t.pendown()
+            for i in range(2):
+                t.forward(rect.width)
+                t.left(90)
+                t.forward(rect.height)
+                t.left(90)
+            t.hideturtle()
+
+        t.color("#b5e3d8")
+        #draw square
+        for square in list_squares:
+            t.showturtle()
+            t.penup()
+            t.goto(square.x, square.y)
+            t.pendown()
+            for i in range(4):
+                .forward(square.width)
+                t.left(90)
+            t.hideturtle()
+
+        turtle.exitonclick()

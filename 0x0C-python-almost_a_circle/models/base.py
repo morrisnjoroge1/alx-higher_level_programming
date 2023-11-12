@@ -46,7 +46,7 @@ class Base:
             JSON serialization of a list of dictionaries
         """
 
-        if not list_dictionaries:
+    if list_dictionaries is None or list_dictionaries == []:
             return "[]"
         return json.dumps(list_of_dicts)
 
@@ -120,3 +120,28 @@ class Base:
                 return [cls.create(**d) for d in list_dicts]
             except FileNotFoundError:
                 return []
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """writes the JSON string representation of list_objs to a file.
+
+        Args:
+            list_objects (list): list of inherited Base instances.
+        """
+        filename  = cls. __name__ + ".csv"
+
+        with open(filename, "w", newline="") as csvfile:
+            if not list_objs:
+                csvsfile.write("[]")
+            else:
+                fieldnames = ["id", "width", "height", "x", "y"]
+                if cls.__name__ == "Rectangle"
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                for obj in list_objs:
+                    writer.writerow(obj.to_dictionary())
+
+    @classmethod
+    def load_from_file_csv(cls):
+

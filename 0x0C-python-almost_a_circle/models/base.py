@@ -34,8 +34,7 @@ class Base:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
 
-
-    @staticmethods
+    @staticmethod
     def to_json_string(list_dictionaries):
         """converts a list of dictionaries to JSON string.
 
@@ -46,27 +45,26 @@ class Base:
             JSON serialization of a list of dictionaries
         """
 
-    if list_dictionaries is None or list_dictionaries == []:
-        return "[]"
-    return json.dumps(list_of_dictionaries)
-
+        if list_dictionaries is None or list_dictionaries == []:
+            return "[]"
+        return json.dumps(list_dictionaries)
 
     @classmethod
-    def save_to_file(cls, list_of_objects):
+    def save_to_file(cls, list_objs):
         """Saves the JSON serialization of a list of objects to a file.
 
         Args:
             lists_obj(list) - list of inherited Base inheritance
         """
 
-    filename = cls.__name__ + ".json"
-
-    with open(filename, "w") as jsonfile:
-        if not list_of_objects:
-            jsonfile.write("[]")
-        else:
-            list_dicts = [o.to_dictionary() for o in list_of_objects]
-            jsonfile.write(Base.to_json_string(list_dicts))
+        # Check if list_objs is None or empty
+        if list_objs is None:
+            list_objs = []
+        filename = cls.__name__ + ".json"
+        obj_dicts = [obj.to_dictionary() for obj in list_objs]
+        json_str = cls.to_json_string(obj_dicts)
+        with open(filename, mode='w', encoding='utf-8') as file:
+            file.write(json_str)
 
 
 
@@ -157,9 +155,9 @@ class Base:
                 if cls.__name__ == "Rectangle":
                     #depends on classname,deff fieleldnames
                     #for reading data from csv file
-                   fieldnames = ["id", "width", "height", "x", "y"]
-               else:
-                   fieldnames = ["id", "size", "x", "y"]
+                    fieldnames = ["id", "width", "height", "x", "y"]
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
                 
                 #read data fromcsv file
                 list = csv.DictReader(file, fieldnames=fieldnames)
@@ -168,10 +166,10 @@ class Base:
                 list = [dict({k, int(v)} for k, v in d.items())
                         for d in list]
                 return [cls.create(**d) for d in list]
-            except FileNotFoundError:
-                return []
+        except FileNotFoundError:
+            return []
 
-        @staticmethod
+    @staticmethod
     def draw(list_rectangles, list_squares):
         """Draw Rectangles and Squares using the turtle module.
 
@@ -207,7 +205,7 @@ class Base:
             t.goto(square.x, square.y)
             t.pendown()
             for i in range(4):
-                .forward(square.width)
+                t.forward(square.width)
                 t.left(90)
             t.hideturtle()
 

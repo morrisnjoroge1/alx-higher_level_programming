@@ -6,7 +6,8 @@ Module that connects python script to a database
 from sys import argv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+from relationship_city import Base, City
+from relationship_state import State
 
 if __name__ == "__main__":
 
@@ -16,14 +17,11 @@ if __name__ == "__main__":
         pool_pre_ping=True
     )
 
+    Base.metadata.create_all(engine)
     my_session_maker = sessionmaker(bind=engine)
     my_session = my_session_maker()
 
-    for state in my_session.query(State):
-        if argv[4] == state.name:
-            print("{}".format(state.id))
-            break
-    else:
-        print("Not found")
+    my_session.add(City(name="San Francisco", state=State(name="California")))
+    my_session.commit()
 
     my_session.close()
